@@ -384,7 +384,11 @@ public class Game implements EngineObject {
 			return;
 		}
 
-		overlay.showOverlay(Overlay.BLOOD);
+		if (mon != null) {
+			overlay.showHitSide(mon.x, mon.y);
+		} else {
+			overlay.showOverlay(Overlay.BLOOD);
+		}
 
 		if (!state.godMode && nextLevelTime == 0) {
 			if (state.heroArmor > 0) {
@@ -1110,6 +1114,7 @@ public class Game implements EngineObject {
 		}
 
 		overlay.renderOverlay(gl);
+		overlay.renderHitSide(gl);
 
 		if (!engine.inWallpaperMode) {
 			engine.stats.render(gl);
